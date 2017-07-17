@@ -1,6 +1,6 @@
 # USAGE
 # python object_size.py --camera 0 --width 2.5
-# python object_size.py --camera 0 --width 2.5
+# python object_size.py --camera 1 --width 2.5
 
 # import the necessary packages
 from scipy.spatial import distance as dist
@@ -13,8 +13,7 @@ import cv2
 
 def midpoint(ptA, ptB):
 	return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
-#camera = cv2.VideoCapture(1)
-#width = 2.5
+
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-c", "--camera", type=int, required=True,
@@ -22,13 +21,14 @@ ap.add_argument("-c", "--camera", type=int, required=True,
 ap.add_argument("-w", "--width", type=float, required=True,
 	help="width of the left-most object in the image (in inches)")
 args = vars(ap.parse_args())
+
+# intialize the camera recording
 camera = cv2.VideoCapture(args["camera"])
-Detectou = False
+Detectou = False #just an aux variable
 while(1):
 
 	# load the image, convert it to grayscale, and blur it slightly
 	ret, image = camera.read()
-	#image = cv2.imread(args["image"])
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, (7, 7), 0)
 
@@ -44,13 +44,14 @@ while(1):
 	cnts = cnts[0] if imutils.is_cv2() else cnts[1]
 
 	# sort the contours from left-to-right and initialize the
-	# 'pixels per metric' calibration variable
+	# if no object were recognized after a recognition the program will stop with error
 	try:
 		(cnts, _) = contours.sort_contours(cnts)
 		Detectou = True
 	except: 
 		if Detectou: raise Parou_De_Detectar
 		else: pass
+	# 'pixels per metric' calibration variable
 	pixelsPerMetric = None
 	orig = image.copy()
 	# loop over the contours individually
