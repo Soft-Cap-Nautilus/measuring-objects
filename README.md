@@ -1,4 +1,4 @@
-This code was written and tested in Python2.7 using OpenCV3.2.0 runnin on Ubuntu14.04
+This code was written and tested in Python2.7 using OpenCV3.2.0 running on Ubuntu14.04
 
 
 First be sure of have the necessary packages: Scipy and Imutils.
