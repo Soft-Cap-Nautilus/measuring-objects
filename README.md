@@ -22,4 +22,8 @@ Example:
 
 python object_size.py --camera 0 --width 2.5
 
+This project was based on:
+
+http://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/
+
 Have fun!
