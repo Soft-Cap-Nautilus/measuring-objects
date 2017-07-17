@@ -2,6 +2,7 @@ This code was written and tested in Python2.7 using OpenCV3.2.0 runnin on Ubuntu
 
 First be sure of have the necessary packages: Scipy and Imutils.
 You can get them easy doing:
+
 $ pip install scipy
 $ pip install imutils
 
